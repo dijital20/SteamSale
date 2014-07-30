@@ -107,6 +107,10 @@ class SteamSale:
         return out_string
 
     def dump_store_html(self):
+        """
+        Dumps the HTML from the store to a local file. Useful for debugging.
+        :return: None
+        """
         store_content = request.urlopen(self.store_url).read()
         soup = BeautifulSoup(store_content)
         with open('store_content.html', mode='w') as f:
