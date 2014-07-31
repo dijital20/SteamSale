@@ -28,6 +28,11 @@ class SteamSale:
         logger.debug('Done getting initial list of sale items.\n')
 
     def loop(self):
+        """
+        Loops through, checking for games every 5 minutes, and displaying results if they have changed from the last check.
+        
+        :return: Nothing
+        """
         logger.debug('Starting loop.')
         print(self.sale_items_string)
         while 1:
@@ -41,6 +46,12 @@ class SteamSale:
         logger.debug('Stopping loop.')
 
     def parse_store(self, text=True):
+        """
+        Parses the store front page and returns the list of sale games.
+        
+        :param text: bool -- True: text is printed to the console; False: text is not printed to the console.
+        :returns: list -- List of Dict of the sale game information.
+        """
         if text:
             print('Getting items', end='', flush=True)
         sale_items = list()
@@ -98,6 +109,7 @@ class SteamSale:
     def sale_items_string(self):
         """
         Compile the list of dictionaries self.sale_items to a pretty string for displaying.
+        
         :return: string
         """
         out_string = 'Games on Sale ({})\n{:=^80}\n'.format(datetime.now(), '')
@@ -109,6 +121,7 @@ class SteamSale:
     def dump_store_html(self):
         """
         Dumps the HTML from the store to a local file. Useful for debugging.
+        
         :return: None
         """
         store_content = request.urlopen(self.store_url).read()
